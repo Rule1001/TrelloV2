@@ -3,14 +3,14 @@ import ListItem from './ListItem'
 
 
 class List extends React.Component {
-  render() {
+  render(props) {
     return (
       <div>
 
         <div className="column is-10">
           <nav className="panel">
             <p className="panel-heading">
-              Repositories
+              {this.props.listTitle}
   </p>
             <div className="panel-block">
               <p className="control has-icons-left">
@@ -26,9 +26,12 @@ class List extends React.Component {
                 <i className="fa fa-book"></i>
               </span>
               <div className="colums">
-              <ListItem />
-              <ListItem />
-              <ListItem />
+               {/*{Object.keys(this.props.listItems).map((ListItem) => {
+          return <ListItem
+            listItemBody={this.props.listItems.body}
+            listId={this.props.listId}
+          />
+        })}*/}
               </div>
               
   </a>

@@ -8,7 +8,7 @@ class ListItem extends React.Component {
         <div className="card">
           <header className="card-header">
             <p className="card-header-title">
-              Component
+              Task
     </p>
  
               <span className="icon">

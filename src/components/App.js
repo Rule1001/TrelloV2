@@ -4,7 +4,43 @@ import '../style/App.css'
 import List from './List'
 
 import NavBar from './NavBar';
+
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      lists: {
+    '1': {
+      title: 'To do',
+      id: 1
+    },
+    '2': {
+      title: 'Doing',
+      id:2
+    },
+    '3': {
+      title: 'Done',
+      id:3
+    }
+  },
+  listItems: {
+    '1': {
+      body: 'task 1 to do',
+      listId: 1
+    },
+     '2': {
+      body: 'task 2 to do',
+      listId: 1
+    },
+     '3': {
+      body: 'task 3 to do',
+      listId: 1
+    }
+  }
+    };
+
+  }
+
   render() {
     return (
       <div>
@@ -15,11 +51,13 @@ class App extends React.Component {
           <BoardButtons />
         </div>
         <div className="columns">
-
-          <List />
-          <List />
-          <List />
-          <List />
+        {Object.keys(this.state.lists).map((elem) => {
+          return <List
+            listTitle={this.state.lists[elem].title}
+            listItems={this.state.listItems}
+            listId={this.state.lists[elem].id}
+          />;
+        })}
 
 
         </div>
@@ -31,3 +69,4 @@ class App extends React.Component {
 }
 
 export default App;
+
