@@ -1,0 +1,15 @@
+#trello-logo {
+    height: 30px;
+    width: auto;
+    float: right;
+
+}
+
+.component-NavBar {
+  background-color: rgb(0,103,163);
+}
+
+.boards-button {
+    width: 10em;  height: 2em;
+    margin: 5px;
+}
