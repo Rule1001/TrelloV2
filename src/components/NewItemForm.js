@@ -20,7 +20,7 @@ class NewItemForm extends React.Component {
             </p>
           </div>
           <p className="control">
-            <button className="button is-success" type="submit">Add Item</button>
+            <button className="button is-success" type="submit">Add a card...</button>
           </p>
         </form>
       </div>
