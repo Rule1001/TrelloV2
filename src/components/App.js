@@ -1,101 +1,57 @@
 import React from 'react';
-import BoardButtons from './BoardButtons'
-import '../style/App.css'
-import List from './List'
+import {v4} from 'uuid';
+import BoardButtons from './BoardButtons';
+import '../style/App.css';
+import initialState from '../data/initialState';
+import List from './List';
 
 import NavBar from './NavBar';
 
 class App extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
-    this.state = {
-      lists: {
-        '1': {
-          title: 'To do',
-          id: '1'
-        },
-        '2': {
-          title: 'Doing',
-          id: '2'
-        },
-        '3': {
-          title: 'Done',
-          id: '3'
-        }
-      },
-      listItems: {
-        '1': {
-          title: 'task 1',
-          body: 'shopping',
-          listId: '1'
-        },
-        '2': {
-          title: 'task 2',
-          body: 'eating',
-          listId: '1'
-        },
-        '3': {
-          title: 'task 3',
-          body: 'cleaning',
-          listId: '1'
-        }
-      }
-    };
-
+    this.state = initialState;
+    this.addItem = this.addItem.bind(this);
   }
-
-  render() {
-    const listCards = function (listItems) {
-
-      const result = {};
-      for (let key in listItems) {
-        let listId = listItems[key].listId
-        if (result[listId]) {
-          result[listId].push(listItems[key])
-        }
-        else {
-          result[listId] = []
-          result[listId].push(listItems[key])
-        }
-      }
-      return result
-    }
-    const result = listCards(this.state.listItems)
-
+  render () {
     return (
-      <div>
-        <div className="component-Nav">
-          <NavBar />
-        </div>
-        <div className="component-Buttons">
-          <BoardButtons />
-        </div>
+      <div className="component-App">
+        <NavBar />
+        <BoardButtons />
         <div className="columns">
-          {Object.keys(this.state.lists).map((elem) => {
-            console.log(result)
-            return <List
-              listTitle={this.state.lists[elem].title}
-              listId={this.state.lists[elem].id}
-              listItems={ result[elem] ? result[elem] : [] }
-              lists={this.state.lists}
-            />;
-
-
-
-
-
+          {Object.values(this.state.lists).map((list) => {
+            return (
+              <List
+                key={list.id}
+                title={list.title}
+                listId={list.id}
+                items={filterCardsByListId(this.state.items, list.id)}
+                addItem={this.addItem}
+              />
+            );
           })}
-
-
         </div>
-
       </div>
-
-    )
+    );
+  }
+  addItem (title, listId) {
+    const newItemId = v4();
+    const newItems = Object.assign({}, this.state.items, {
+      [newItemId]: {
+        id: newItemId,
+        listId,
+        title,
+        body: ''
+      }
+    })
+    this.setState({items: newItems});
   }
 }
 
-
+function filterCardsByListId (items, listId) {
+  return Object.values(items).filter(item => {
+    return item.listId === listId;
+  });
+}
 
 export default App;
-

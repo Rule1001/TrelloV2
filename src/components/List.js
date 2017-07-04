@@ -1,57 +1,33 @@
 import React from 'react';
-import ListItem from './ListItem'
+import PropTypes from 'prop-types';
 
+import '../style/List.css';
 
-class List extends React.Component {
-  render(props) {
-    return (
-      < div >
+import ListItem from './ListItem';
+import NewItemForm from './NewItemForm';
 
-        <div className="column is-10">
-          <nav className="panel">
-            <p className="panel-heading">
-              {this.props.listTitle}
-            </p>
-            <div className="panel-block">
-              <p className="control has-icons-left">
-                <input className="input is-small" type="text" placeholder="Search" />
-                <span className="icon is-small is-left">
-                  <i className="fa fa-search"></i>
-                </span>
-              </p>
-            </div>
+const List = (props) => (
+  <div className="box component-List">
+    <h4 className="title is-4">{props.title}</h4>
+    {props.items.map((item) => {
+      return <ListItem
+        key={item.id}
+        itemId={item.id}
+        body={item.body}
+        listId={item.listId}
+        title={item.title}
+      />;
+    })}
+    <NewItemForm listId={props.listId} addItem={props.addItem} />
+  </div>
+);
 
-            <a className="panel-block is-active">
-              <span className="panel-icon">
-                <i className="fa fa-book"></i>
-              </span>
-              <div className="colums">
-
-
-                {Object.keys(this.props.listItems).map((item) => {
-                  return <ListItem
-                    listItemBody={this.props.listItems[item].body}
-                    listId={this.props.listItems[item].listId}
-                    listItemsTitle={this.props.listItems[item].title}
-                  />
-
-                })}
-              </div>
-
-            </a>
-            <div className="panel-block">
-              <button className="button is-primary is-outlined is-fullwidth">
-                Add a card...
-    </button>
-            </div>
-          </nav>
-
-        </div>
-      </div >
-
-    )
-  }
-}
+List.propTypes = {
+  title: PropTypes.string.isRequired,
+  listId: PropTypes.string.isRequired,
+  items: PropTypes.array.isRequired,
+  addItem: PropTypes.func.isRequired
+};
 
 export default List;
 

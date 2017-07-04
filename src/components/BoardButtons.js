@@ -1,18 +1,13 @@
 import React from 'react';
-import '../style/BoardButtons.css'
+import '../style/BoardButtons.css';
 
 class BoardButtons extends React.Component {
-  render() {
+  render () {
     return (
-      <div>
-        <div className="component-Buttons">
-          <div className="column">
-            Buttons
-  </div>
-
-        </div>
+      <div className="component-BoardButtons">
+        Buttons
       </div>
-    )
+    );
   }
 }
 
