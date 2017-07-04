@@ -5,6 +5,7 @@ import '../style/App.css';
 import initialState from '../data/initialState';
 import List from './List';
 import NewListForm from './NewListForm'
+import DeleteButton from './DeleteButton'
 
 import NavBar from './NavBar';
 
@@ -14,6 +15,7 @@ class App extends React.Component {
     this.state = initialState;
     this.addItem = this.addItem.bind(this);
     this.addList = this.addList.bind(this);
+    this.deleteList = this.deleteList.bind(this);
   }
   render() {
     return (
@@ -29,11 +31,12 @@ class App extends React.Component {
                 listId={list.id}
                 items={filterCardsByListId(this.state.items, list.id)}
                 addItem={this.addItem}
+                deleteList={this.deleteList}
+
               />
             );
           })}
           <NewListForm
-            
             addList={this.addList} />
         </div>
       </div>
@@ -63,7 +66,20 @@ class App extends React.Component {
     this.setState({ lists: newLists })
 
   }
+
+  deleteList(listId) {
+    console.log(listId)
+    let newLists = Object.assign({}, this.state.lists)
+    delete newLists[listId]
+    this.setState({ lists: newLists })
+  }
 }
+
+
+
+
+
+
 
 function filterCardsByListId(items, listId) {
   return Object.values(items).filter(item => {

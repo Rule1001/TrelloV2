@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import DeleteButton from './DeleteButton'
+
 
 import '../style/List.css';
 
@@ -19,6 +21,10 @@ const List = (props) => (
       />;
     })}
     <NewItemForm listId={props.listId} addItem={props.addItem} />
+    <DeleteButton
+      deleteList={props.deleteList}
+      listId={props.listId}
+    />
   </div>
 );
 
