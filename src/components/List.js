@@ -5,13 +5,13 @@ import ListItem from './ListItem'
 class List extends React.Component {
   render(props) {
     return (
-      <div>
+      < div >
 
         <div className="column is-10">
           <nav className="panel">
             <p className="panel-heading">
               {this.props.listTitle}
-  </p>
+            </p>
             <div className="panel-block">
               <p className="control has-icons-left">
                 <input className="input is-small" type="text" placeholder="Search" />
@@ -26,15 +26,19 @@ class List extends React.Component {
                 <i className="fa fa-book"></i>
               </span>
               <div className="colums">
-               {/*{Object.keys(this.props.listItems).map((ListItem) => {
-          return <ListItem
-            listItemBody={this.props.listItems.body}
-            listId={this.props.listId}
-          />
-        })}*/}
+
+
+                {Object.keys(this.props.listItems).map((item) => {
+                  return <ListItem
+                    listItemBody={this.props.listItems[item].body}
+                    listId={this.props.listItems[item].listId}
+                    listItemsTitle={this.props.listItems[item].title}
+                  />
+
+                })}
               </div>
-              
-  </a>
+
+            </a>
             <div className="panel-block">
               <button className="button is-primary is-outlined is-fullwidth">
                 Add a card...
@@ -43,7 +47,7 @@ class List extends React.Component {
           </nav>
 
         </div>
-      </div>
+      </div >
 
     )
   }

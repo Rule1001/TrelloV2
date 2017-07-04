@@ -10,38 +10,58 @@ class App extends React.Component {
     super(props);
     this.state = {
       lists: {
-    '1': {
-      title: 'To do',
-      id: 1
-    },
-    '2': {
-      title: 'Doing',
-      id:2
-    },
-    '3': {
-      title: 'Done',
-      id:3
-    }
-  },
-  listItems: {
-    '1': {
-      body: 'task 1 to do',
-      listId: 1
-    },
-     '2': {
-      body: 'task 2 to do',
-      listId: 1
-    },
-     '3': {
-      body: 'task 3 to do',
-      listId: 1
-    }
-  }
+        '1': {
+          title: 'To do',
+          id: '1'
+        },
+        '2': {
+          title: 'Doing',
+          id: '2'
+        },
+        '3': {
+          title: 'Done',
+          id: '3'
+        }
+      },
+      listItems: {
+        '1': {
+          title: 'task 1',
+          body: 'shopping',
+          listId: '1'
+        },
+        '2': {
+          title: 'task 2',
+          body: 'eating',
+          listId: '1'
+        },
+        '3': {
+          title: 'task 3',
+          body: 'cleaning',
+          listId: '1'
+        }
+      }
     };
 
   }
 
   render() {
+    const listCards = function (listItems) {
+
+      const result = {};
+      for (let key in listItems) {
+        let listId = listItems[key].listId
+        if (result[listId]) {
+          result[listId].push(listItems[key])
+        }
+        else {
+          result[listId] = []
+          result[listId].push(listItems[key])
+        }
+      }
+      return result
+    }
+    const result = listCards(this.state.listItems)
+
     return (
       <div>
         <div className="component-Nav">
@@ -51,13 +71,20 @@ class App extends React.Component {
           <BoardButtons />
         </div>
         <div className="columns">
-        {Object.keys(this.state.lists).map((elem) => {
-          return <List
-            listTitle={this.state.lists[elem].title}
-            listItems={this.state.listItems}
-            listId={this.state.lists[elem].id}
-          />;
-        })}
+          {Object.keys(this.state.lists).map((elem) => {
+            console.log(result)
+            return <List
+              listTitle={this.state.lists[elem].title}
+              listId={this.state.lists[elem].id}
+              listItems={ result[elem] ? result[elem] : [] }
+              lists={this.state.lists}
+            />;
+
+
+
+
+
+          })}
 
 
         </div>
@@ -67,6 +94,8 @@ class App extends React.Component {
     )
   }
 }
+
+
 
 export default App;
 

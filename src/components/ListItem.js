@@ -2,33 +2,33 @@ import React from 'react';
 
 
 class ListItem extends React.Component {
-  render() {
+  render(props) {
     return (
       <div>
         <div className="card">
           <header className="card-header">
             <p className="card-header-title">
-              Task
-    </p>
- 
-              <span className="icon">
-                <i className="fa fa-angle-down"></i>
-              </span>
+              {this.props.listItemsTitle}
+            </p>
+
+            <span className="icon">
+              <i className="fa fa-angle-down"></i>
+            </span>
 
           </header>
           <div className="card-content">
             <div className="content">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
+              {this.props.listItemBody}
 
-    </div>
             </div>
-
           </div>
-
 
         </div>
 
-        )
+
+      </div>
+
+    )
   }
 }
 
